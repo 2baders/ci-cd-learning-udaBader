@@ -3,12 +3,9 @@ name: bader-test
 on:
   workflow_dispatch:
 
-env:
-  LINUX_VER: 'ubuntu-latest'
-
 jobs:
   build:
-    runs-on: ${{ env.LINUX_VER }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -21,7 +18,7 @@ jobs:
 
   deploy-staging:
     needs: build
-    runs-on: ${{ env.LINUX_VER }}
+    runs-on: ubuntu-latest
     environment: staging
     steps:
       - name: Deploy to Staging
