@@ -1,0 +1,28 @@
+name: bader-test
+
+on:
+  workflow_dispatch:
+    
+env:
+  LINUX_VER: 'ubuntu-latest'
+
+jobs:
+  build:
+    runs-on: ${{env.LINUX_VER}}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print System info
+        run: |
+          echo "Running on $(uname -a)"
+          echo "Hey Bader"
+          echo "Triggered by: ${{github.actor}}"
+
+  deploy-staging:
+    needs: build
+    runs-on: ${{env.LINUX_VER}}
+    environment: staging
+    steps:
+      - name: Deploy to Staging
+        run: echo "Deploying to Staging"
